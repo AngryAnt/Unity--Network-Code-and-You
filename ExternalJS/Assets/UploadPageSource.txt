@@ -1,0 +1,28 @@
+<html>
+	<body bgcolor="grey">
+		<form action="upload-callback.php" onsubmit="Submit ()" enctype="multipart/form-data" method="post">
+			Upload
+			<input type="file" name="file" />
+			<input type="submit" value="Upload" />
+			<input type="hidden" name="MAX_FILE_SIZE" value="20M">
+			<a href="#" onclick="Cancel ();">Cancel</a>
+		</form>
+		<script>
+			self.parent.frames["WebPlayerFrame"].GetUnity ().SendMessage ("Control", "OnUploadDisplay", "");
+
+
+			function Cancel ()
+			{
+				self.parent.frames["WebPlayerFrame"].GetUnity ().SendMessage ("Control", "HideFrame", "");
+				document.location.href = "about:blank";
+			}
+
+
+			function Submit ()
+			{
+				self.parent.frames["WebPlayerFrame"].GetUnity ().SendMessage ("Control", "OnSubmit", "");
+				return true;
+			}
+		</script>
+	</body>
+</html>

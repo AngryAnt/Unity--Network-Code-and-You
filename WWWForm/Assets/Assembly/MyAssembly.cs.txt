@@ -1,0 +1,26 @@
+using UnityEngine;
+using System.Collections;
+
+
+public class MyAssembly
+{
+	const string kURL = "http://localhost/WWWForm/upload.php";
+
+
+	public static WWW UploadScreenshot ()
+	{
+		Debug.Log ("Taking screenshot");
+
+		Texture2D texture = new Texture2D (Screen.width, Screen.height, TextureFormat.RGB24, false);
+
+		texture.ReadPixels (new Rect (0.0f, 0.0f, Screen.width, Screen.height), 0, 0, false);
+		texture.Apply ();
+
+		Debug.Log ("Uploading");
+
+		WWWForm form = new WWWForm ();
+		form.AddBinaryData ("file", texture.EncodeToPNG (), "Screenshot.png", "image/png");
+
+		return new WWW (kURL, form);
+	}
+}

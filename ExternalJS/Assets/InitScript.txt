@@ -1,0 +1,11 @@
+if (self == top || !self.parent.frames["CallbackFrame"])
+// The frameset does not exist
+{
+	document.write (
+		'<html><head><title>META</title></head><frameset rows="0,*" id="BaseFrameset" border="no"><frame name="CallbackFrame" src="about:blank" noresize><frame name="WebPlayerFrame" src="ExternalJS.html" noresize></frameset></html>'
+	);
+}
+else
+{
+	GetUnity ().SendMessage ("Control", "OnLoaded", "");
+}
